@@ -1,8 +1,3 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - master
 
@@ -39,9 +34,9 @@ steps:
     mavenPomFile: 'OnlineLearningPlatformEurekaServer/pom.xml'
     goals: 'clean package'
 
-# ---------- OnlineLearningPlatform Service ----------
+# ---------- OnlinelearningPlatform (Fix: lowercase L!) ----------
 - task: Maven@3
-  displayName: 'Build Main OnlineLearningPlatform'
+  displayName: 'Build Main OnlinelearningPlatform'
   inputs:
-    mavenPomFile: 'OnlineLearningPlatform/pom.xml'
+    mavenPomFile: 'OnlinelearningPlatform/pom.xml'
     goals: 'clean package'
