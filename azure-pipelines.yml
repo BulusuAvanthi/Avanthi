@@ -7,16 +7,41 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
+
+# ---------- API Gateway ----------
 - task: Maven@3
+  displayName: 'Build API Gateway'
   inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+    mavenPomFile: 'OnlineLearningPlatformApiGatewayCb/pom.xml'
+    goals: 'clean package'
+
+# ---------- Config Server ----------
+- task: Maven@3
+  displayName: 'Build Config Server'
+  inputs:
+    mavenPomFile: 'OnlineLearningPlatformConfigServer/pom.xml'
+    goals: 'clean package'
+
+# ---------- Courses Service ----------
+- task: Maven@3
+  displayName: 'Build Courses Service'
+  inputs:
+    mavenPomFile: 'OnlineLearningPlatformCourses/pom.xml'
+    goals: 'clean package'
+
+# ---------- Eureka Server ----------
+- task: Maven@3
+  displayName: 'Build Eureka Server'
+  inputs:
+    mavenPomFile: 'OnlineLearningPlatformEurekaServer/pom.xml'
+    goals: 'clean package'
+
+# ---------- OnlinelearningPlatform (Fix: lowercase L!) ----------
+- task: Maven@3
+  displayName: 'Build Main OnlinelearningPlatform'
+  inputs:
+    mavenPomFile: 'OnlinelearningPlatform/pom.xml'
+    goals: 'clean package'
